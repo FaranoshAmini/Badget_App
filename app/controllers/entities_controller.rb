@@ -13,12 +13,14 @@ class EntitiesController < ApplicationController
   def create
     @new_entity = Entity.new(entity_params)
     return unless @new_entity.save
+
     flash[:success] = 'Entity Created successfully'
     redirect_to group_entities_path(entity_params[:group_id])
   end
 
   private
+
   def entity_params
     params.require(:entity).permit(:name, :amount, :author_id, :group_id)
-  end  
+  end
 end

@@ -6,7 +6,7 @@ class EntitiesController < ApplicationController
   end
 
   def new
-    @new_entity = entity.new
+    @new_entity = Entity.new
     @user_groups = Group.where(user: current_user)
   end
 
@@ -16,6 +16,15 @@ class EntitiesController < ApplicationController
 
     flash[:success] = 'Entity Created successfully'
     redirect_to group_entities_path(entity_params[:group_id])
+  end
+
+  def destroy
+    @transaction = Entity.find(params[:id])
+
+    return unless @transaction.destroy
+
+    flash[:success] = 'Transaction deleted successfully.'
+    redirect_to group_entities_path(params[:group_id])
   end
 
   private

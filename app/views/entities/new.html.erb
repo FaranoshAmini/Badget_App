@@ -1,2 +1,21 @@
-<h1>Entities#new</h1>
-<p>Find me in app/views/entities/new.html.erb</p>
+<header class="page-header">
+<h1>New Transaction</h1>
+<%= link_to "SIGN OUT", destroy_user_session_path, method: :delete, class: "btn-icon" %>
+</header>
+<section class="form-wrapper" id="new-category-form">
+<%= form_with model: @new_entity do |f| %>
+ <div class="field">
+ <%= f.text_field :name, placeholder: "Name" %>
+ </div>
+ <div class="field">
+ <%= f.number_field :name, placeholder: "Amount" %>
+ </div>
+ <div class="field">
+ <%= f.collection_select :group_id, @user_groups, :id, :name %>
+ </div>
+ <%= f.hidden_field :author_id, value: current_user.id %>
+ <div class="field">
+<%= f.submit :ADD, class: 'btn' %>
+</div>
+<% end %>
+</section>

@@ -2,16 +2,14 @@
 <h1>New Category</h1>
 </header>
 <section class="form-wrapper" id="new-category-form">
-<%= form_with model: @new_group do |f| %>
-<div class="field">
-<%= f.text_field :name, placeholder: "Name" %>
-</div>
-<div class="field">
-<%= f.text_field :icon, placeholder: "Icon URL", class: 'last-input' %>
-</div>
-<%= f.hidden_field :user_id, value: current_user.id %>
-<div class="field">
-<%= f.submit :CREATE, class: 'btn' %>
-</div>
+<%= form_for @group, url: groups_path, html: { method: :post } do |f| %>
+ <div class="field">
+ <%= f.text_field :name, placeholder: "Name" %>
+ </div>
+ <div class="field">
+ <%= f.text_field :icon, placeholder: "Icon URL", class: "last-input" %>
+ </div>
+ <div class="field" >
+<%= f.submit :CREATE, class: "btn-add" %>
 <% end %>
 </section>

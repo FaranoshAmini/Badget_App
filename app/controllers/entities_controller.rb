@@ -1,21 +1,31 @@
 class EntitiesController < ApplicationController
-  before_action :require_login
   def index
     @group = Group.find(params[:group_id])
-    @group_entities = Entity.where(group: @group).order(created_at: desc)
+    @entities = @group.entities.order(created_at: :desc)
+    # @group_entities = Entity.where(group: @group)
   end
 
   def new
     @new_entity = Entity.new
+    @group = Group.find(params[:group_id])
     @user_groups = Group.where(user: current_user)
   end
 
   def create
-    @new_entity = Entity.new(entity_params)
-    return unless @new_entity.save
-
-    flash[:success] = 'Entity Created successfully'
-    redirect_to group_entities_path(entity_params[:group_id])
+    # @group = Group.find(params[:group_id])
+    # @entity = @group.entities.new(name: entity_params[:name],
+    #   amount: entity_params[:amount], author_id: current_user.id)
+    entity = Entity.create(name: entity_params[:name], author_id: current_user.id, amount: entity_params[:amount])
+    return unless entity.save
+    GroupEntity.create(entity_id: entity.id, group_id: params[:group])
+    flash[:notice] = 'Transaction created successfully'
+    redirect_to group_entities_path
+    # if @entity.save
+    #   flash[:notice] = 'Transaction is completed'
+    #   redirect_to group_entities_path(@group)
+    # else
+    #   flash[:notice] = 'Invalid Transaction!'
+    # end
   end
 
   def destroy
@@ -30,6 +40,6 @@ class EntitiesController < ApplicationController
   private
 
   def entity_params
-    params.require(:entity).permit(:name, :amount, :author_id, :group_id)
+    params.require(:entity).permit(:name, :amount, :author_id)
   end
 end

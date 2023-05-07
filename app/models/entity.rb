@@ -1,6 +1,6 @@
 class Entity < ApplicationRecord
-  belongs_to :author, class_name: 'User'
-  belongs_to :group
+  has_many :group_entities, foreign_key: :entity_id
+  has_many :groups, through: :group_entities, foreign_key: :entity_id
   validates :name, :author, :group, :amount, presence: true
 
   def date

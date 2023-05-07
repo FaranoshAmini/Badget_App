@@ -5,15 +5,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#index"
   resources :groups, only: [:index, :new, :create, :destroy] do
-    resources :entities, only: [:index, :destroy]
+    resources :entities, only: [:index, :new, :create, :destroy]
   end
   
-  resources :entities, only: [:new, :create]
+  # resources :entities, only: [:new, :create]
 end
-
-# Rails.application.routes.draw do
-#   devise_for :users, controllers: {
-#     registrations: 'devise/registrations',
-#     confirmations: 'devise/confirmations'
-#   }
-# end

@@ -7,7 +7,7 @@
 <span class="sec-text"><%= @group.total_amount %></span>
 </div>
 <div class="cards-container transactions-container">
-<%= @group_entities.each do |entity| %>
+<%= @entities.each do |entity| %>
 <div class="card">
 <div class="column">
 <span class="primary-text"><%= entity.name %></span>
@@ -19,6 +19,6 @@
 </div>
 </div>
 <% end %>
-<%= link_to "ADD TRANSACTION", new_entity_path, class: "btn-add" %>
+<%= link_to "ADD TRANSACTION", new_group_entity_path(@group), class: "btn-add" %>
  </div>
 </section>

@@ -17,6 +17,7 @@ class EntitiesController < ApplicationController
     #   amount: entity_params[:amount], author_id: current_user.id)
     entity = Entity.create(name: entity_params[:name], author_id: current_user.id, amount: entity_params[:amount])
     return unless entity.save
+
     GroupEntity.create(entity_id: entity.id, group_id: params[:group])
     flash[:notice] = 'Transaction created successfully'
     redirect_to group_entities_path

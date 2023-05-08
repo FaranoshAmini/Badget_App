@@ -78,7 +78,7 @@ a {
 }
 
 h1 {
-  font-size: 2erm;
+  font-size: 32px;
 }
 
 header#page-header,
@@ -106,8 +106,7 @@ header#page-header img {
 
 header#page-header h1 {
   padding: 10px 0;
-
-  font-size: 1.5rem;
+  font-size: 24px;
   white-space: nowrap;
   color: #ffe;
 }
